@@ -24,18 +24,20 @@ def game():
             available_moves = [i for i, v in enumerate(board) if v == " "]
             counter+= 1
             if win(counter,board,turn):
+                print_board(board)
                 print('X is a winner')
                 break
             elif counter == 9:
+                print_board(board)
                 print('Draw!')
                 break
-            print("It's O's turn!")
+            #print("It's O's turn!")
             opponent = int(random.choice(available_moves))
             board[opponent] = 'O'
             turn= '0'
             available_moves = [i for i, v in enumerate(board) if v == " "]
             counter += 1
-            print_board(board)
+            #print_board(board)
             if win(counter, board, turn):
              print("O is a winner!")
              break
