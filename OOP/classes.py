@@ -16,3 +16,5 @@ auto2.display_info()
 print(auto1.model)
 
 
+print(auto1.color)
+
