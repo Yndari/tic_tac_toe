@@ -45,14 +45,58 @@ class Giraffe():
         return f'Hunger level: {self.hunger}'
 
 
-Jim_Kerry = Giraffe()
+# Jim_Kerry = Giraffe()
 
 class Grass():
     def __init__(self, value =0):
         self.value = value
 
-name= Grass(90)
-print(Jim_Kerry.eat(name))
-print (Jim_Kerry.eat(name))
-print(Jim_Kerry.hunger)
+# name= Grass(90)
+# print(Jim_Kerry.eat(name))
+# print (Jim_Kerry.eat(name))
+# print(Jim_Kerry.hunger)
+
+class Knight:
+    def __init__(self, sword=False):
+        self.sword = sword
+        self.hp = 100
+        self.damage = self.set_damage()
+
+
+    def set_damage(self):
+        if self.sword:
+            self.damage = 20
+        else:
+            self.damage = 5
+        return self.damage
+
+class BossKninght(Knight):
+    def __init__(self, sword=False, super_damage=0):
+        super().__init__(sword)
+        self.super_damage = super_damage
+
+
+player = Knight(True)
+boss = BossKninght(True, super_damage=15)
+# print(player.damage)
+# print(boss.damage)1
+
+while player.hp > 0 and boss.hp > 0:
+    action = input("Если готовы, нажмите 1 ")
+    if action == '1':
+        print("Бьет рыцарь!")
+        boss.hp -= player.damage
+        print(f'Жизни Босса: {boss.hp}')
+        print("Босс!")
+        player.hp -= boss.damage + boss.super_damage
+        print(f'Жизни рыцаря: {player.hp}')
+
+
+if player.hp > 0:
+    print('Рыцарь победил!')
+else:
+    print('Босс победил')
+
+
+
 
