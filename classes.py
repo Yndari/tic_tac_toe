@@ -69,33 +69,70 @@ class Knight:
         else:
             self.damage = 5
         return self.damage
+    def __add__(self, other):
+        return self.damage + other.damage
+
+
+
+
 
 class BossKninght(Knight):
     def __init__(self, sword=False, super_damage=0):
         super().__init__(sword)
         self.super_damage = super_damage
 
+class MagicSword():
+    def __init__(self, damage, ready=True):
+        self.damage = damage
+        self.ready = ready
+    def __add__(self, other):
+        return self.damage + other.damage
+
+
+
+
+
+
 
 player = Knight(True)
-boss = BossKninght(True, super_damage=15)
-# print(player.damage)
-# print(boss.damage)1
+boss = BossKninght(True, super_damage=10)
+companion = MagicSword(60)
+print(player + companion)
+cooldawn = 0
+
 
 while player.hp > 0 and boss.hp > 0:
+
     action = input("Если готовы, нажмите 1 ")
     if action == '1':
-        print("Бьет рыцарь!")
-        boss.hp -= player.damage
-        print(f'Жизни Босса: {boss.hp}')
-        print("Босс!")
+        cooldawn += 1
+        if cooldawn % 3 == 0:
+             print('Бьет рыцарь с магическим мечом!')
+             boss.hp -= player + companion
+        else:
+            print("Бьет рыцарь!")
+            boss.hp -= player.damage
+        print("Бьет Босс!")
         player.hp -= boss.damage + boss.super_damage
-        print(f'Жизни рыцаря: {player.hp}')
+        if player.hp < 0:
+            player.hp = 0
+        elif boss.hp < 0:
+            boss.hp = 0
+        print(f'Жизни рыцаря:', player.hp, '\nЖизни Босса', boss.hp)
 
 
-if player.hp > 0:
-    print('Рыцарь победил!')
+    else:
+        break
+
+
+
+
+if player.hp == boss.hp:
+    print('Ничья')
+elif boss.hp > player.hp:
+    print(f'Побеждает Босс!')
 else:
-    print('Босс победил')
+    print(f'Побеждает Рыцарь!')
 
 
 
